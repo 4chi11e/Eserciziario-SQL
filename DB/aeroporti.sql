@@ -1,6 +1,6 @@
 -- --------------------------------------------------------
 -- Host:                         127.0.0.1
--- Versione server:              10.4.21-MariaDB - mariadb.org binary distribution
+-- Versione server:              10.4.28-MariaDB - mariadb.org binary distribution
 -- S.O. server:                  Win64
 -- HeidiSQL Versione:            11.3.0.6295
 -- --------------------------------------------------------
@@ -13,11 +13,11 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 
--- Dump della struttura del database aeroporti
-CREATE DATABASE IF NOT EXISTS `aeroporti` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
-USE `aeroporti`;
+-- Dump della struttura del database aeroporti-ibrido
+CREATE DATABASE IF NOT EXISTS `aeroporti-ibrido` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
+USE `aeroporti-ibrido`;
 
--- Dump della struttura di tabella aeroporti.accompagna
+-- Dump della struttura di tabella aeroporti-ibrido.accompagna
 CREATE TABLE IF NOT EXISTS `accompagna` (
   `accompagnato` int(10) unsigned NOT NULL,
   `accompagnatore` int(10) unsigned NOT NULL,
@@ -28,9 +28,9 @@ CREATE TABLE IF NOT EXISTS `accompagna` (
   CONSTRAINT `FK_accompagna_cliente` FOREIGN KEY (`accompagnato`) REFERENCES `cliente` (`codcliente`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK_accompagna_cliente_2` FOREIGN KEY (`accompagnatore`) REFERENCES `cliente` (`codcliente`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK_accompagna_volo` FOREIGN KEY (`volo`) REFERENCES `volo` (`codvolo`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dump dei dati della tabella aeroporti.accompagna: ~4.031 rows (circa)
+-- Dump dei dati della tabella aeroporti-ibrido.accompagna: ~4.031 rows (circa)
 /*!40000 ALTER TABLE `accompagna` DISABLE KEYS */;
 INSERT INTO `accompagna` (`accompagnato`, `accompagnatore`, `volo`) VALUES
 	(1, 9, 50),
@@ -4066,7 +4066,7 @@ INSERT INTO `accompagna` (`accompagnato`, `accompagnatore`, `volo`) VALUES
 	(3000, 2636, 42);
 /*!40000 ALTER TABLE `accompagna` ENABLE KEYS */;
 
--- Dump della struttura di tabella aeroporti.aereo
+-- Dump della struttura di tabella aeroporti-ibrido.aereo
 CREATE TABLE IF NOT EXISTS `aereo` (
   `codaereo` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `codmodello` int(10) unsigned DEFAULT NULL,
@@ -4078,9 +4078,9 @@ CREATE TABLE IF NOT EXISTS `aereo` (
   KEY `FK_aereo_modello` (`codmodello`),
   CONSTRAINT `FK_aereo_compagnia` FOREIGN KEY (`codcompagnia`) REFERENCES `compagnia` (`codcompagnia`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `FK_aereo_modello` FOREIGN KEY (`codmodello`) REFERENCES `modello` (`codmodello`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dump dei dati della tabella aeroporti.aereo: ~60 rows (circa)
+-- Dump dei dati della tabella aeroporti-ibrido.aereo: ~60 rows (circa)
 /*!40000 ALTER TABLE `aereo` DISABLE KEYS */;
 INSERT INTO `aereo` (`codaereo`, `codmodello`, `codcompagnia`, `anno_costruzione`, `anno_acquisto`) VALUES
 	(1, 12, 7, '2007', '2019'),
@@ -4145,7 +4145,7 @@ INSERT INTO `aereo` (`codaereo`, `codmodello`, `codcompagnia`, `anno_costruzione
 	(60, 8, 6, '2002', '2015');
 /*!40000 ALTER TABLE `aereo` ENABLE KEYS */;
 
--- Dump della struttura di vista aeroporti.aereo_leggibile
+-- Dump della struttura di vista aeroporti-ibrido.aereo_leggibile
 -- Creazione di una tabella temporanea per risolvere gli errori di dipendenza della vista
 CREATE TABLE `aereo_leggibile` (
 	`codaereo` INT(10) UNSIGNED NOT NULL,
@@ -4158,7 +4158,7 @@ CREATE TABLE `aereo_leggibile` (
 	`nazione` CHAR(50) NULL COLLATE 'utf8mb4_general_ci'
 ) ENGINE=MyISAM;
 
--- Dump della struttura di tabella aeroporti.aeroporto
+-- Dump della struttura di tabella aeroporti-ibrido.aeroporto
 CREATE TABLE IF NOT EXISTS `aeroporto` (
   `codaeroporto` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `localita` char(50) DEFAULT NULL,
@@ -4167,9 +4167,9 @@ CREATE TABLE IF NOT EXISTS `aeroporto` (
   PRIMARY KEY (`codaeroporto`),
   KEY `FK_aeroporto_citta` (`codcitta`),
   CONSTRAINT `FK_aeroporto_citta` FOREIGN KEY (`codcitta`) REFERENCES `citta` (`codcitta`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dump dei dati della tabella aeroporti.aeroporto: ~13 rows (circa)
+-- Dump dei dati della tabella aeroporti-ibrido.aeroporto: ~13 rows (circa)
 /*!40000 ALTER TABLE `aeroporto` DISABLE KEYS */;
 INSERT INTO `aeroporto` (`codaeroporto`, `localita`, `nome_commerciale`, `codcitta`) VALUES
 	(1, 'Roma-Fiumicino', 'Aeroporto intercontinentale Leonardo da Vinci', 10),
@@ -4184,10 +4184,10 @@ INSERT INTO `aeroporto` (`codaeroporto`, `localita`, `nome_commerciale`, `codcit
 	(10, 'Londra-Gatwick', 'Aeroporto di Londra-Gatwick', 4),
 	(11, 'Francoforte', 'Aeroporto di Francoforte sul Meno', 8),
 	(12, 'Parigi-Orly', 'Aeroporto di Parigi-Orly', 3),
-	(13, 'Madrid-Barajas', 'Aeroporto Adolfo Suárez Madrid-Barajas', 5);
+	(13, 'Madrid-Barajas', 'Aeroporto Adolfo SuÃƒÆ’Ã‚Â¡rez Madrid-Barajas', 5);
 /*!40000 ALTER TABLE `aeroporto` ENABLE KEYS */;
 
--- Dump della struttura di tabella aeroporti.citta
+-- Dump della struttura di tabella aeroporti-ibrido.citta
 CREATE TABLE IF NOT EXISTS `citta` (
   `codcitta` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `nome` char(50) DEFAULT NULL,
@@ -4195,9 +4195,9 @@ CREATE TABLE IF NOT EXISTS `citta` (
   `abitanti` int(10) unsigned DEFAULT NULL,
   `abitanti_agglomerato` int(10) unsigned DEFAULT NULL,
   PRIMARY KEY (`codcitta`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dump dei dati della tabella aeroporti.citta: ~8 rows (circa)
+-- Dump dei dati della tabella aeroporti-ibrido.citta: ~9 rows (circa)
 /*!40000 ALTER TABLE `citta` DISABLE KEYS */;
 INSERT INTO `citta` (`codcitta`, `nome`, `nazione`, `abitanti`, `abitanti_agglomerato`) VALUES
 	(1, 'Milano', 'Italia', 1398000, 4994000),
@@ -4208,19 +4208,20 @@ INSERT INTO `citta` (`codcitta`, `nome`, `nazione`, `abitanti`, `abitanti_agglom
 	(6, 'Palermo', 'Italia', 673735, NULL),
 	(7, 'Catania', 'Italia', 313396, NULL),
 	(8, 'Francoforte', 'Germania', 763000, 1941000),
-	(10, 'Roma', 'Italia', 2784000, 3207000);
+	(10, 'Roma', 'Italia', 2784000, 3207000),
+	(11, 'Bari', 'Italia', NULL, NULL);
 /*!40000 ALTER TABLE `citta` ENABLE KEYS */;
 
--- Dump della struttura di tabella aeroporti.cliente
+-- Dump della struttura di tabella aeroporti-ibrido.cliente
 CREATE TABLE IF NOT EXISTS `cliente` (
   `codcliente` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `cognome` char(50) DEFAULT NULL,
   `nome` char(50) DEFAULT NULL,
   `data_nascita` date DEFAULT NULL,
   PRIMARY KEY (`codcliente`)
-) ENGINE=InnoDB AUTO_INCREMENT=3001 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=3001 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dump dei dati della tabella aeroporti.cliente: ~2.965 rows (circa)
+-- Dump dei dati della tabella aeroporti-ibrido.cliente: ~2.965 rows (circa)
 /*!40000 ALTER TABLE `cliente` DISABLE KEYS */;
 INSERT INTO `cliente` (`codcliente`, `cognome`, `nome`, `data_nascita`) VALUES
 	(1, 'Romano', 'Antonino', '2010-03-20'),
@@ -4261,8 +4262,8 @@ INSERT INTO `cliente` (`codcliente`, `cognome`, `nome`, `data_nascita`) VALUES
 	(36, 'Bianco', 'Irene', '1946-08-24'),
 	(37, 'Ferrari', 'Luisa', '1963-10-06'),
 	(38, 'Sorrentino', 'Maria', '2002-12-05'),
-	(39, '﻿Rossi', 'Gianluca', '1959-07-03'),
-	(40, 'Longo', '﻿Giuseppe', '1955-09-14'),
+	(39, 'Rossi', 'Gianluca', '1959-07-03'),
+	(40, 'Longo', 'Giuseppe', '1955-09-14'),
 	(41, 'Silvestri', 'Pasquale', '1986-12-23'),
 	(42, 'Lombardo', 'Isabella', '1987-02-21'),
 	(43, 'De Angelis', 'Valerio', '1945-01-03'),
@@ -4371,7 +4372,7 @@ INSERT INTO `cliente` (`codcliente`, `cognome`, `nome`, `data_nascita`) VALUES
 	(146, 'Sala', 'Lorenzo', '1942-05-15'),
 	(147, 'Bianco', 'Beatrice', '1944-12-08'),
 	(148, 'Ricci', 'Silvia', '1978-04-07'),
-	(149, 'Vitale', 'Nicolò', '1958-05-23'),
+	(149, 'Vitale', 'NicolÃƒÆ’Ã‚Â²', '1958-05-23'),
 	(150, 'Giuliani', 'Erika', '1978-04-03'),
 	(151, 'Grasso', 'Ornella', '1986-01-02'),
 	(152, 'Ferrari', 'Liliana', '1970-09-11'),
@@ -4532,7 +4533,7 @@ INSERT INTO `cliente` (`codcliente`, `cognome`, `nome`, `data_nascita`) VALUES
 	(307, 'Monti', 'Cesare', '1966-01-28'),
 	(308, 'Morelli', 'Vittoria', '2000-08-10'),
 	(309, 'Testa', 'Angelo', '1976-12-02'),
-	(310, '﻿Rossi', 'Rita', '1969-07-04'),
+	(310, 'Rossi', 'Rita', '1969-07-04'),
 	(311, 'De Rosa', 'Davide', '1957-07-20'),
 	(312, 'Conti', 'Simone', '2010-03-02'),
 	(313, 'Marini', 'Luca', '1943-03-02'),
@@ -4631,7 +4632,7 @@ INSERT INTO `cliente` (`codcliente`, `cognome`, `nome`, `data_nascita`) VALUES
 	(406, 'Mazza', 'Calogero', '1987-08-27'),
 	(407, 'Farina', 'Alessio', '2003-02-17'),
 	(408, 'Ferri', 'Rebecca', '1986-07-01'),
-	(409, '﻿Rossi', 'Guido', '2011-02-23'),
+	(409, 'Rossi', 'Guido', '2011-02-23'),
 	(410, 'Carbone', 'Susanna', '1964-11-26'),
 	(411, 'Russo', 'Denis', '1966-12-27'),
 	(412, 'Marino', 'Rebecca', '1969-01-02'),
@@ -4704,7 +4705,7 @@ INSERT INTO `cliente` (`codcliente`, `cognome`, `nome`, `data_nascita`) VALUES
 	(479, 'Grassi', 'Antonella', '1988-06-19'),
 	(480, 'Moretti', 'Donato', '1976-07-01'),
 	(481, 'Testa', 'Rocco', '1968-12-04'),
-	(482, '﻿Rossi', 'Francesco', '1962-09-30'),
+	(482, 'Rossi', 'Francesco', '1962-09-30'),
 	(483, 'Costa', 'Sara', '2011-07-03'),
 	(484, 'Farina', 'Dario', '2000-11-24'),
 	(485, 'Farina', 'Giorgia', '1966-06-20'),
@@ -4762,7 +4763,7 @@ INSERT INTO `cliente` (`codcliente`, `cognome`, `nome`, `data_nascita`) VALUES
 	(537, 'Ricci', 'Teresa', '1972-05-28'),
 	(538, 'Conti', 'Adele', '1993-08-11'),
 	(539, 'Farina', 'Daniele', '2020-03-29'),
-	(540, 'Carbone', '﻿Giuseppe', '1971-03-18'),
+	(540, 'Carbone', 'Giuseppe', '1971-03-18'),
 	(541, 'Esposito', 'Ludovica', '2007-07-14'),
 	(542, 'Grasso', 'Renzo', '1948-08-04'),
 	(543, 'Russo', 'Sonia', '1965-12-27'),
@@ -4812,7 +4813,7 @@ INSERT INTO `cliente` (`codcliente`, `cognome`, `nome`, `data_nascita`) VALUES
 	(587, 'Marini', 'Jessica', '1959-12-19'),
 	(588, 'Marchetti', 'Maddalena', '1998-12-14'),
 	(589, 'Gentile', 'Federica', '1958-10-12'),
-	(590, 'Fabbri', '﻿Giuseppe', '1959-05-09'),
+	(590, 'Fabbri', 'Giuseppe', '1959-05-09'),
 	(591, 'Colombo', 'Fatima', '1950-04-05'),
 	(592, 'Esposito', 'Gaetano', '2003-05-13'),
 	(593, 'Giuliani', 'Roberto', '1952-02-11'),
@@ -4904,14 +4905,14 @@ INSERT INTO `cliente` (`codcliente`, `cognome`, `nome`, `data_nascita`) VALUES
 	(679, 'Greco', 'Giacomo', '1948-04-23'),
 	(680, 'Galli', 'Edoardo', '1974-11-11'),
 	(681, 'Vitale', 'Antonia', '1979-04-25'),
-	(682, '﻿Rossi', 'Adriana', '2014-10-28'),
+	(682, 'Rossi', 'Adriana', '2014-10-28'),
 	(683, 'Silvestri', 'Carmela', '2000-05-04'),
 	(684, 'Riva', 'Graziella', '1944-05-13'),
 	(685, 'Greco', 'Renata', '1950-10-13'),
 	(686, 'Palumbo', 'Lidia', '1977-12-02'),
 	(687, 'Costa', 'Emanuele', '1940-04-27'),
 	(688, 'Ferraro', 'Iolanda', '1958-01-01'),
-	(689, '﻿Rossi', 'Emilia', '1943-05-08'),
+	(689, 'Rossi', 'Emilia', '1943-05-08'),
 	(690, 'Silvestri', 'Elisa', '1949-04-04'),
 	(691, 'Barone', 'Giuliano', '1968-07-11'),
 	(692, 'Farina', 'Rebecca', '1947-11-28'),
@@ -4922,7 +4923,7 @@ INSERT INTO `cliente` (`codcliente`, `cognome`, `nome`, `data_nascita`) VALUES
 	(697, 'Fiore', 'Franco', '2004-11-24'),
 	(698, 'Martinelli', 'Matteo', '2012-11-03'),
 	(699, 'Ferretti', 'Maddalena', '1957-07-09'),
-	(700, '﻿Rossi', 'Elsa', '1959-11-02'),
+	(700, 'Rossi', 'Elsa', '1959-11-02'),
 	(701, 'Bianchi', 'Antonia', '1988-07-18'),
 	(702, 'Fabbri', 'Anna maria', '1952-07-26'),
 	(703, 'Bernardi', 'Sonia', '1985-04-17'),
@@ -4973,7 +4974,7 @@ INSERT INTO `cliente` (`codcliente`, `cognome`, `nome`, `data_nascita`) VALUES
 	(748, 'Valentini', 'Assunta', '1966-09-28'),
 	(749, 'Villa', 'Luigina', '1952-01-06'),
 	(750, 'Fiore', 'Francesco', '1951-03-02'),
-	(751, 'Fiore', '﻿Giuseppe', '1960-07-20'),
+	(751, 'Fiore', 'Giuseppe', '1960-07-20'),
 	(752, 'Testa', 'Edoardo', '1964-08-12'),
 	(753, 'Ferri', 'Walter', '2002-10-30'),
 	(754, 'Battaglia', 'Raffaele', '1999-02-18'),
@@ -5094,7 +5095,7 @@ INSERT INTO `cliente` (`codcliente`, `cognome`, `nome`, `data_nascita`) VALUES
 	(869, 'Benedetti', 'Elisabetta', '2006-08-24'),
 	(870, 'Battaglia', 'Domenica', '1952-01-25'),
 	(871, 'Leone', 'Rocco', '1968-10-05'),
-	(872, 'Greco', '﻿Giuseppe', '2013-08-31'),
+	(872, 'Greco', 'Giuseppe', '2013-08-31'),
 	(873, 'Palumbo', 'Federico', '1964-08-29'),
 	(874, 'Monti', 'Davide', '2007-03-10'),
 	(875, 'Conti', 'Ginevra', '2018-06-10'),
@@ -5150,7 +5151,7 @@ INSERT INTO `cliente` (`codcliente`, `cognome`, `nome`, `data_nascita`) VALUES
 	(925, 'Giordano', 'Irene', '1991-12-20'),
 	(926, 'Amato', 'Enrica', '2007-08-08'),
 	(927, 'Riva', 'Claudio', '1953-12-26'),
-	(928, '﻿Rossi', 'Daniele', '2006-12-08'),
+	(928, 'Rossi', 'Daniele', '2006-12-08'),
 	(929, 'Pagano', 'Camilla', '1960-06-19'),
 	(930, 'Gallo', 'Denis', '2001-11-27'),
 	(931, 'Cattaneo', 'Liliana', '2002-06-02'),
@@ -5231,7 +5232,7 @@ INSERT INTO `cliente` (`codcliente`, `cognome`, `nome`, `data_nascita`) VALUES
 	(1006, 'Amato', 'Aldo', '1965-03-10'),
 	(1007, 'Mancini', 'Giuliano', '1975-07-01'),
 	(1008, 'Amato', 'Claudia', '2003-02-09'),
-	(1009, 'De Angelis', 'Nicolò', '1984-02-16'),
+	(1009, 'De Angelis', 'NicolÃƒÆ’Ã‚Â²', '1984-02-16'),
 	(1010, 'Colombo', 'Enzo', '1951-05-27'),
 	(1011, 'Rossetti', 'Valerio', '1941-05-30'),
 	(1012, 'Vitali', 'Carlotta', '1984-12-02'),
@@ -5313,7 +5314,7 @@ INSERT INTO `cliente` (`codcliente`, `cognome`, `nome`, `data_nascita`) VALUES
 	(1088, 'Rossetti', 'Vincenza', '1979-07-23'),
 	(1089, 'Morelli', 'Gianfranco', '2007-01-14'),
 	(1090, 'Cattaneo', 'Guido', '1958-10-21'),
-	(1091, 'Gallo', '﻿Giuseppe', '1942-04-06'),
+	(1091, 'Gallo', 'ÃƒÂ¯Ã‚Â»Ã‚Â¿Giuseppe', '1942-04-06'),
 	(1092, 'Conte', 'Adriano', '1957-07-05'),
 	(1093, 'Mariani', 'Francesca', '1985-09-26'),
 	(1094, 'Donati', 'Camilla', '1956-07-12'),
@@ -5359,7 +5360,7 @@ INSERT INTO `cliente` (`codcliente`, `cognome`, `nome`, `data_nascita`) VALUES
 	(1134, 'Lombardi', 'Massimo', '1985-07-16'),
 	(1135, 'Coppola', 'Irene', '1965-09-13'),
 	(1136, 'Santoro', 'Samuele', '2001-11-11'),
-	(1137, '﻿Rossi', 'Lorenzo', '1957-11-23'),
+	(1137, 'ÃƒÂ¯Ã‚Â»Ã‚Â¿Rossi', 'Lorenzo', '1957-11-23'),
 	(1138, 'Russo', 'Carmelo', '1982-02-24'),
 	(1139, 'Vitali', 'Davide', '2006-09-07'),
 	(1140, 'Martino', 'Concetta', '1988-08-04'),
@@ -5430,7 +5431,7 @@ INSERT INTO `cliente` (`codcliente`, `cognome`, `nome`, `data_nascita`) VALUES
 	(1205, 'Mariani', 'Loredana', '1944-05-24'),
 	(1206, 'Coppola', 'Rebecca', '1998-04-28'),
 	(1207, 'De Luca', 'Clara', '1960-12-11'),
-	(1208, 'De Rosa', '﻿Giuseppe', '1945-11-24'),
+	(1208, 'De Rosa', 'ÃƒÂ¯Ã‚Â»Ã‚Â¿Giuseppe', '1945-11-24'),
 	(1209, 'Battaglia', 'Alessia', '2007-05-28'),
 	(1210, 'Caruso', 'Omar', '1955-02-18'),
 	(1211, 'Longo', 'Susanna', '1977-07-30'),
@@ -5521,7 +5522,7 @@ INSERT INTO `cliente` (`codcliente`, `cognome`, `nome`, `data_nascita`) VALUES
 	(1296, 'Carbone', 'Eleonora', '2005-11-25'),
 	(1297, 'Rizzi', 'Salvatore', '1973-04-18'),
 	(1298, 'Coppola', 'Paolo', '2009-05-11'),
-	(1299, '﻿Rossi', 'Rita', '1944-07-18'),
+	(1299, 'ÃƒÂ¯Ã‚Â»Ã‚Â¿Rossi', 'Rita', '1944-07-18'),
 	(1300, 'Bianchi', 'Sara', '1974-04-07'),
 	(1301, 'Gallo', 'Caterina', '1983-08-31'),
 	(1302, 'Milani', 'Domenico', '2006-08-23'),
@@ -5577,7 +5578,7 @@ INSERT INTO `cliente` (`codcliente`, `cognome`, `nome`, `data_nascita`) VALUES
 	(1352, 'Russo', 'Stefania', '2015-05-27'),
 	(1353, 'Donati', 'Veronica', '1972-03-02'),
 	(1354, 'Amato', 'Mattia', '2007-06-06'),
-	(1355, '﻿Rossi', 'Armando', '1960-03-23'),
+	(1355, 'ÃƒÂ¯Ã‚Â»Ã‚Â¿Rossi', 'Armando', '1960-03-23'),
 	(1356, 'Parisi', 'Calogero', '1962-08-15'),
 	(1357, 'De Luca', 'Luciano', '1968-02-16'),
 	(1358, 'Longo', 'Gaetano', '2020-10-28'),
@@ -5673,7 +5674,7 @@ INSERT INTO `cliente` (`codcliente`, `cognome`, `nome`, `data_nascita`) VALUES
 	(1448, 'Mancini', 'Danilo', '1948-02-04'),
 	(1449, 'Valentini', 'Tommaso', '2008-05-01'),
 	(1450, 'Piras', 'Elisa', '2001-01-26'),
-	(1451, '﻿Rossi', 'Elisabetta', '1975-11-23'),
+	(1451, 'ÃƒÂ¯Ã‚Â»Ã‚Â¿Rossi', 'Elisabetta', '1975-11-23'),
 	(1452, 'Sorrentino', 'Marilena', '2006-07-24'),
 	(1453, 'De Rosa', 'Letizia', '2002-05-31'),
 	(1454, 'Greco', 'Giacomo', '1967-02-19'),
@@ -5734,7 +5735,7 @@ INSERT INTO `cliente` (`codcliente`, `cognome`, `nome`, `data_nascita`) VALUES
 	(1509, 'Marini', 'Rosanna', '1978-12-09'),
 	(1510, 'Basile', 'Vito', '1978-06-12'),
 	(1511, 'Ricci', 'Daniele', '1998-09-02'),
-	(1512, '﻿Rossi', 'Raffaele', '2003-09-01'),
+	(1512, 'ÃƒÂ¯Ã‚Â»Ã‚Â¿Rossi', 'Raffaele', '2003-09-01'),
 	(1513, 'Vitale', 'Salvatore', '1984-03-10'),
 	(1514, 'Costantini', 'Leonardo', '2010-08-11'),
 	(1515, 'Moretti', 'Ilaria', '1960-08-11'),
@@ -5765,7 +5766,7 @@ INSERT INTO `cliente` (`codcliente`, `cognome`, `nome`, `data_nascita`) VALUES
 	(1540, 'Montanari', 'Patrizia', '2006-01-07'),
 	(1541, 'Donati', 'Melissa', '1962-03-21'),
 	(1542, 'Mariani', 'Tommaso', '2016-11-03'),
-	(1543, 'Sanna', 'Nicolò', '1999-01-06'),
+	(1543, 'Sanna', 'NicolÃƒÆ’Ã‚Â²', '1999-01-06'),
 	(1544, 'Conte', 'Maria luisa', '1990-07-30'),
 	(1545, 'Conti', 'Graziella', '1944-10-03'),
 	(1546, 'Serra', 'Arianna', '1961-11-11'),
@@ -5779,7 +5780,7 @@ INSERT INTO `cliente` (`codcliente`, `cognome`, `nome`, `data_nascita`) VALUES
 	(1554, 'Amato', 'Antonino', '1989-09-25'),
 	(1555, 'Palmieri', 'Giuliana', '1976-02-07'),
 	(1556, 'Rossetti', 'Carlo', '1992-08-01'),
-	(1557, '﻿Rossi', 'Nicolò', '2006-08-04'),
+	(1557, 'ÃƒÂ¯Ã‚Â»Ã‚Â¿Rossi', 'NicolÃƒÆ’Ã‚Â²', '2006-08-04'),
 	(1558, 'Barone', 'Giuseppina', '2019-03-31'),
 	(1559, 'Fabbri', 'Walter', '2004-08-14'),
 	(1560, 'Gentile', 'Diego', '1964-08-23'),
@@ -5884,7 +5885,7 @@ INSERT INTO `cliente` (`codcliente`, `cognome`, `nome`, `data_nascita`) VALUES
 	(1659, 'Sorrentino', 'Paolo', '2020-10-03'),
 	(1660, 'Marino', 'Fatima', '1941-05-28'),
 	(1661, 'Bianco', 'Ilaria', '2019-01-02'),
-	(1662, '﻿Rossi', 'Mattia', '1972-04-04'),
+	(1662, 'ÃƒÂ¯Ã‚Â»Ã‚Â¿Rossi', 'Mattia', '1972-04-04'),
 	(1663, 'Ferrari', 'Salvatore', '1959-10-06'),
 	(1664, 'Esposito', 'Elisa', '2000-09-28'),
 	(1665, 'Amato', 'Ginevra', '1984-08-16'),
@@ -5907,13 +5908,13 @@ INSERT INTO `cliente` (`codcliente`, `cognome`, `nome`, `data_nascita`) VALUES
 	(1682, 'Vitale', 'Paolo', '1995-04-25'),
 	(1683, 'Ruggiero', 'Elsa', '1951-10-07'),
 	(1684, 'Mazza', 'Clara', '1954-07-23'),
-	(1685, '﻿Rossi', 'Rosaria', '1966-04-14'),
+	(1685, 'ÃƒÂ¯Ã‚Â»Ã‚Â¿Rossi', 'Rosaria', '1966-04-14'),
 	(1686, 'Grassi', 'Rocco', '1940-10-04'),
 	(1687, 'Gentile', 'Antonella', '2018-04-02'),
 	(1688, 'Farina', 'Maria luisa', '1954-01-14'),
 	(1689, 'Caputo', 'Bruno', '2002-09-08'),
 	(1690, 'Farina', 'Alberto', '1944-12-08'),
-	(1691, 'Grasso', '﻿Giuseppe', '1968-08-30'),
+	(1691, 'Grasso', 'ÃƒÂ¯Ã‚Â»Ã‚Â¿Giuseppe', '1968-08-30'),
 	(1692, 'Neri', 'Cristina', '2011-10-02'),
 	(1693, 'Bruno', 'Enrica', '1960-11-06'),
 	(1694, 'Piras', 'Piero', '1945-05-16'),
@@ -5953,7 +5954,7 @@ INSERT INTO `cliente` (`codcliente`, `cognome`, `nome`, `data_nascita`) VALUES
 	(1728, 'Valentini', 'Gianluca', '1944-05-23'),
 	(1729, 'Negri', 'Giacomo', '1957-06-30'),
 	(1730, 'Milani', 'Veronica', '1963-01-05'),
-	(1731, 'Marchetti', '﻿Giuseppe', '1971-05-26'),
+	(1731, 'Marchetti', 'ÃƒÂ¯Ã‚Â»Ã‚Â¿Giuseppe', '1971-05-26'),
 	(1732, 'De Angelis', 'Nicola', '1959-09-19'),
 	(1733, 'De Luca', 'Sofia', '2009-04-08'),
 	(1734, 'Greco', 'Renata', '2015-05-19'),
@@ -5984,7 +5985,7 @@ INSERT INTO `cliente` (`codcliente`, `cognome`, `nome`, `data_nascita`) VALUES
 	(1759, 'Vitale', 'Marco', '1977-09-08'),
 	(1760, 'Piras', 'Luciano', '1973-05-04'),
 	(1761, 'De Santis', 'Ilaria', '1977-11-11'),
-	(1762, '﻿Rossi', 'Sofia', '1954-01-02'),
+	(1762, 'ÃƒÂ¯Ã‚Â»Ã‚Â¿Rossi', 'Sofia', '1954-01-02'),
 	(1763, 'Conte', 'Samuele', '1941-09-15'),
 	(1764, 'Lombardi', 'Enrica', '1988-12-08'),
 	(1765, 'Leone', 'Cinzia', '1954-06-10'),
@@ -6000,7 +6001,7 @@ INSERT INTO `cliente` (`codcliente`, `cognome`, `nome`, `data_nascita`) VALUES
 	(1775, 'Ricci', 'Caterina', '2014-07-26'),
 	(1776, 'Silvestri', 'Luigina', '1956-05-10'),
 	(1777, 'Damico', 'Olga', '1995-03-19'),
-	(1778, 'Barbieri', 'Nicolò', '2008-02-08'),
+	(1778, 'Barbieri', 'NicolÃƒÆ’Ã‚Â²', '2008-02-08'),
 	(1779, 'Ferraro', 'Gianluca', '2001-08-28'),
 	(1780, 'Mancini', 'Luca', '2003-08-01'),
 	(1781, 'Fiore', 'Rosaria', '2008-05-12'),
@@ -6239,7 +6240,7 @@ INSERT INTO `cliente` (`codcliente`, `cognome`, `nome`, `data_nascita`) VALUES
 	(2014, 'Valentini', 'Nicoletta', '1961-03-16'),
 	(2015, 'Mariani', 'Alberto', '1948-10-05'),
 	(2016, 'Carbone', 'Adriano', '2015-09-21'),
-	(2017, '﻿Rossi', 'Franca', '2020-10-19'),
+	(2017, 'ÃƒÂ¯Ã‚Â»Ã‚Â¿Rossi', 'Franca', '2020-10-19'),
 	(2018, 'Vitali', 'Camilla', '2008-03-06'),
 	(2019, 'Montanari', 'Gabriella', '1990-10-25'),
 	(2020, 'Mazza', 'Isabella', '1971-07-30'),
@@ -6368,7 +6369,7 @@ INSERT INTO `cliente` (`codcliente`, `cognome`, `nome`, `data_nascita`) VALUES
 	(2143, 'Rinaldi', 'Martina', '2015-03-11'),
 	(2144, 'Ferri', 'Armando', '1965-07-29'),
 	(2145, 'Villa', 'Claudio', '1952-03-23'),
-	(2146, 'Bellini', 'Nicolò', '2002-06-12'),
+	(2146, 'Bellini', 'NicolÃƒÆ’Ã‚Â²', '2002-06-12'),
 	(2147, 'Longo', 'Elisabetta', '1994-12-04'),
 	(2148, 'Bianco', 'Jacopo', '1945-06-13'),
 	(2149, 'Bianchi', 'Gianluca', '1979-01-24'),
@@ -6390,7 +6391,7 @@ INSERT INTO `cliente` (`codcliente`, `cognome`, `nome`, `data_nascita`) VALUES
 	(2165, 'Martini', 'Mara', '1975-03-11'),
 	(2166, 'Longo', 'Roberto', '1950-01-13'),
 	(2167, 'Mancini', 'Virginia', '1974-10-22'),
-	(2168, '﻿Rossi', 'Marisa', '1978-12-13'),
+	(2168, 'ÃƒÂ¯Ã‚Â»Ã‚Â¿Rossi', 'Marisa', '1978-12-13'),
 	(2169, 'Ruggiero', 'Matilde', '1947-01-07'),
 	(2170, 'Martini', 'Renata', '1966-02-09'),
 	(2171, 'Martino', 'Camilla', '2011-06-10'),
@@ -6458,7 +6459,7 @@ INSERT INTO `cliente` (`codcliente`, `cognome`, `nome`, `data_nascita`) VALUES
 	(2233, 'Greco', 'Lidia', '2004-07-31'),
 	(2234, 'Greco', 'Marco', '1957-12-12'),
 	(2235, 'Battaglia', 'Valerio', '1999-11-10'),
-	(2236, '﻿Rossi', 'Ivana', '1966-05-18'),
+	(2236, 'ÃƒÂ¯Ã‚Â»Ã‚Â¿Rossi', 'Ivana', '1966-05-18'),
 	(2237, 'Marchetti', 'Adele', '1976-02-02'),
 	(2238, 'De Rosa', 'Danilo', '1976-06-06'),
 	(2239, 'Sartori', 'Sara', '1941-04-25'),
@@ -6467,7 +6468,7 @@ INSERT INTO `cliente` (`codcliente`, `cognome`, `nome`, `data_nascita`) VALUES
 	(2242, 'Neri', 'Marta', '1993-12-10'),
 	(2243, 'Orlando', 'Monica', '2018-08-13'),
 	(2244, 'Bellini', 'Paola', '1942-10-04'),
-	(2245, 'Serra', 'Nicolò', '1960-11-07'),
+	(2245, 'Serra', 'NicolÃƒÆ’Ã‚Â²', '1960-11-07'),
 	(2246, 'Neri', 'Giuliano', '2011-11-15'),
 	(2247, 'Testa', 'Alessia', '1978-04-23'),
 	(2248, 'Morelli', 'Silvia', '2001-02-19'),
@@ -6570,12 +6571,12 @@ INSERT INTO `cliente` (`codcliente`, `cognome`, `nome`, `data_nascita`) VALUES
 	(2345, 'Fabbri', 'Marcello', '1977-10-01'),
 	(2346, 'Pellegrino', 'Ornella', '1993-10-03'),
 	(2347, 'Grasso', 'Camilla', '2013-07-23'),
-	(2348, 'Basile', '﻿Giuseppe', '1999-01-22'),
+	(2348, 'Basile', 'ÃƒÂ¯Ã‚Â»Ã‚Â¿Giuseppe', '1999-01-22'),
 	(2349, 'Negri', 'Ornella', '1994-08-14'),
 	(2350, 'Colombo', 'Paolo', '1948-12-15'),
 	(2351, 'Ricci', 'Antonella', '1972-09-28'),
 	(2352, 'Testa', 'Marilena', '1980-01-29'),
-	(2353, '﻿Rossi', 'Ivana', '1997-05-03'),
+	(2353, 'ÃƒÂ¯Ã‚Â»Ã‚Â¿Rossi', 'Ivana', '1997-05-03'),
 	(2354, 'Pagano', 'Emanuele', '1977-10-13'),
 	(2355, 'Sorrentino', 'Daniele', '1945-04-30'),
 	(2356, 'Parisi', 'Adriano', '1986-10-21'),
@@ -6689,10 +6690,10 @@ INSERT INTO `cliente` (`codcliente`, `cognome`, `nome`, `data_nascita`) VALUES
 	(2464, 'Martini', 'Gaetano', '1957-06-19'),
 	(2465, 'Vitale', 'Bruna', '1964-07-06'),
 	(2466, 'Sartori', 'Fabio', '1953-05-05'),
-	(2467, 'Bianco', '﻿Giuseppe', '1947-01-14'),
+	(2467, 'Bianco', 'ÃƒÂ¯Ã‚Â»Ã‚Â¿Giuseppe', '1947-01-14'),
 	(2468, 'Grassi', 'Gianluca', '1965-04-04'),
 	(2469, 'Longo', 'Renata', '2019-04-30'),
-	(2470, '﻿Rossi', 'Marilena', '1995-06-28'),
+	(2470, 'ÃƒÂ¯Ã‚Â»Ã‚Â¿Rossi', 'Marilena', '1995-06-28'),
 	(2471, 'Riva', 'Liliana', '1949-04-29'),
 	(2472, 'Negri', 'Maurizio', '1980-05-17'),
 	(2473, 'Bellini', 'Maurizio', '1986-05-16'),
@@ -6710,7 +6711,7 @@ INSERT INTO `cliente` (`codcliente`, `cognome`, `nome`, `data_nascita`) VALUES
 	(2485, 'Rizzo', 'Lidia', '2009-02-24'),
 	(2486, 'Rossetti', 'Emanuela', '1964-10-11'),
 	(2487, 'Conte', 'Antonio', '1968-04-22'),
-	(2488, 'Ruggiero', 'Nicolò', '2006-06-30'),
+	(2488, 'Ruggiero', 'NicolÃƒÆ’Ã‚Â²', '2006-06-30'),
 	(2489, 'Mariani', 'Vincenza', '1946-12-31'),
 	(2490, 'Martini', 'Graziella', '1980-12-03'),
 	(2491, 'Fiore', 'Rosario', '2009-02-23'),
@@ -6749,7 +6750,7 @@ INSERT INTO `cliente` (`codcliente`, `cognome`, `nome`, `data_nascita`) VALUES
 	(2524, 'Giordano', 'Maria', '1962-01-22'),
 	(2525, 'Sorrentino', 'Vittorio', '2020-09-14'),
 	(2526, 'Serra', 'Alberto', '1998-03-12'),
-	(2527, 'Barone', '﻿Giuseppe', '1950-09-02'),
+	(2527, 'Barone', 'ÃƒÂ¯Ã‚Â»Ã‚Â¿Giuseppe', '1950-09-02'),
 	(2528, 'Farina', 'Virginia', '1976-06-28'),
 	(2529, 'Milani', 'Lidia', '2004-01-13'),
 	(2530, 'Marini', 'Luca', '1997-11-29'),
@@ -6818,7 +6819,7 @@ INSERT INTO `cliente` (`codcliente`, `cognome`, `nome`, `data_nascita`) VALUES
 	(2593, 'Basile', 'Maria luisa', '1949-05-29'),
 	(2594, 'Milani', 'Gianluca', '2017-04-02'),
 	(2595, 'Ferrari', 'Alessio', '2018-03-13'),
-	(2596, '﻿Rossi', 'Filomena', '2018-04-24'),
+	(2596, 'ÃƒÂ¯Ã‚Â»Ã‚Â¿Rossi', 'Filomena', '2018-04-24'),
 	(2597, 'Ferraro', 'Caterina', '1993-04-26'),
 	(2598, 'Fiore', 'Sofia', '1988-03-03'),
 	(2599, 'Caputo', 'Angela', '1970-09-27'),
@@ -6829,7 +6830,7 @@ INSERT INTO `cliente` (`codcliente`, `cognome`, `nome`, `data_nascita`) VALUES
 	(2604, 'Bianchi', 'Angelo', '2010-09-16'),
 	(2605, 'Marino', 'Gianni', '1968-09-01'),
 	(2606, 'Rinaldi', 'Franca', '1944-10-13'),
-	(2607, 'Amato', 'Nicolò', '1986-10-20'),
+	(2607, 'Amato', 'NicolÃƒÆ’Ã‚Â²', '1986-10-20'),
 	(2608, 'Moretti', 'Manuela', '1964-09-15'),
 	(2609, 'Caputo', 'Emilia', '2010-09-05'),
 	(2610, 'Testa', 'Massimo', '1998-12-02'),
@@ -6911,14 +6912,14 @@ INSERT INTO `cliente` (`codcliente`, `cognome`, `nome`, `data_nascita`) VALUES
 	(2686, 'Ruggiero', 'Gianfranco', '1965-05-31'),
 	(2687, 'Caruso', 'Gaia', '1972-05-05'),
 	(2688, 'Ricci', 'Luisa', '1994-08-28'),
-	(2689, '﻿Rossi', 'Loredana', '2003-02-09'),
+	(2689, 'ÃƒÂ¯Ã‚Â»Ã‚Â¿Rossi', 'Loredana', '2003-02-09'),
 	(2690, 'Guerra', 'Silvana', '2020-11-28'),
 	(2691, 'Fontana', 'Erika', '1984-05-06'),
 	(2692, 'Bianco', 'Loredana', '1940-01-31'),
 	(2693, 'Sorrentino', 'Pasquale', '2020-10-18'),
 	(2694, 'Battaglia', 'Giuseppina', '1996-11-21'),
 	(2695, 'De Angelis', 'Antonia', '2008-04-21'),
-	(2696, '﻿Rossi', 'Gabriella', '1955-12-15'),
+	(2696, 'ÃƒÂ¯Ã‚Â»Ã‚Â¿Rossi', 'Gabriella', '1955-12-15'),
 	(2697, 'Riva', 'Lina', '2011-03-21'),
 	(2698, 'Romano', 'Cinzia', '1975-10-18'),
 	(2699, 'Ruggiero', 'Domenico', '1952-05-30'),
@@ -7017,7 +7018,7 @@ INSERT INTO `cliente` (`codcliente`, `cognome`, `nome`, `data_nascita`) VALUES
 	(2792, 'Pellegrino', 'Teresa', '1946-12-05'),
 	(2793, 'Testa', 'Luca', '1954-10-29'),
 	(2794, 'Giuliani', 'Giovanni', '1996-06-17'),
-	(2795, 'Romano', 'Nicolò', '2014-12-13'),
+	(2795, 'Romano', 'NicolÃƒÆ’Ã‚Â²', '2014-12-13'),
 	(2796, 'Grasso', 'Enrico', '2000-11-28'),
 	(2797, 'Mancini', 'Bruna', '2009-06-05'),
 	(2798, 'Bianchi', 'Riccardo', '2016-10-28'),
@@ -7063,7 +7064,7 @@ INSERT INTO `cliente` (`codcliente`, `cognome`, `nome`, `data_nascita`) VALUES
 	(2838, 'Ferrara', 'Giuseppa', '1957-01-21'),
 	(2839, 'Ruggiero', 'Giuliano', '1995-05-27'),
 	(2840, 'Sartori', 'Rocco', '2005-05-18'),
-	(2841, 'Ricci', '﻿Giuseppe', '1998-12-08'),
+	(2841, 'Ricci', 'ÃƒÂ¯Ã‚Â»Ã‚Â¿Giuseppe', '1998-12-08'),
 	(2842, 'Marchetti', 'Antonino', '1967-11-29'),
 	(2843, 'Martinelli', 'Cristina', '1967-01-10'),
 	(2844, 'Mazza', 'Dario', '1996-05-29'),
@@ -7108,7 +7109,7 @@ INSERT INTO `cliente` (`codcliente`, `cognome`, `nome`, `data_nascita`) VALUES
 	(2883, 'Amato', 'Pasquale', '1972-07-06'),
 	(2884, 'Rizzo', 'Federico', '2010-08-24'),
 	(2885, 'Marchetti', 'Gianfranco', '2001-08-19'),
-	(2886, '﻿Rossi', 'Federica', '2016-12-13'),
+	(2886, 'ÃƒÂ¯Ã‚Â»Ã‚Â¿Rossi', 'Federica', '2016-12-13'),
 	(2887, 'Vitali', 'Lorenzo', '1979-11-03'),
 	(2888, 'Ruggiero', 'Antonio', '1941-03-20'),
 	(2889, 'De Rosa', 'Andrea', '2002-01-24'),
@@ -7125,7 +7126,7 @@ INSERT INTO `cliente` (`codcliente`, `cognome`, `nome`, `data_nascita`) VALUES
 	(2900, 'Gatti', 'Carmelo', '2004-01-02'),
 	(2901, 'Donati', 'Carmela', '1991-11-20'),
 	(2902, 'Sartori', 'Maria grazia', '2000-01-03'),
-	(2903, 'Galli', 'Nicolò', '2003-08-12'),
+	(2903, 'Galli', 'NicolÃƒÆ’Ã‚Â²', '2003-08-12'),
 	(2904, 'Testa', 'Maria luisa', '1950-08-17'),
 	(2905, 'Lombardo', 'Giada', '1966-06-16'),
 	(2906, 'Marino', 'Marinella', '1974-06-04'),
@@ -7157,7 +7158,7 @@ INSERT INTO `cliente` (`codcliente`, `cognome`, `nome`, `data_nascita`) VALUES
 	(2932, 'Marino', 'Loredana', '1943-11-30'),
 	(2933, 'Ruggiero', 'Jacopo', '1985-01-26'),
 	(2934, 'Russo', 'Noemi', '1945-07-08'),
-	(2935, '﻿Rossi', 'Gaia', '1942-11-05'),
+	(2935, 'ÃƒÂ¯Ã‚Â»Ã‚Â¿Rossi', 'Gaia', '1942-11-05'),
 	(2936, 'Mancini', 'Vittorio', '1976-03-06'),
 	(2937, 'Orlando', 'Ivan', '1985-08-18'),
 	(2938, 'Giordano', 'Alberto', '1971-05-11'),
@@ -7198,7 +7199,7 @@ INSERT INTO `cliente` (`codcliente`, `cognome`, `nome`, `data_nascita`) VALUES
 	(2973, 'Rinaldi', 'Carolina', '1959-08-03'),
 	(2974, 'Lombardo', 'Barbara', '1976-11-21'),
 	(2975, 'Ferrara', 'Gianfranco', '1957-08-11'),
-	(2976, '﻿Rossi', 'Grazia', '1988-04-09'),
+	(2976, 'ÃƒÂ¯Ã‚Â»Ã‚Â¿Rossi', 'Grazia', '1988-04-09'),
 	(2977, 'Palumbo', 'Marisa', '2017-11-27'),
 	(2978, 'Milani', 'Erika', '1953-05-09'),
 	(2979, 'Ferrari', 'Thomas', '1946-11-18'),
@@ -7225,15 +7226,15 @@ INSERT INTO `cliente` (`codcliente`, `cognome`, `nome`, `data_nascita`) VALUES
 	(3000, 'Palmieri', 'Aurora', '2010-12-07');
 /*!40000 ALTER TABLE `cliente` ENABLE KEYS */;
 
--- Dump della struttura di tabella aeroporti.compagnia
+-- Dump della struttura di tabella aeroporti-ibrido.compagnia
 CREATE TABLE IF NOT EXISTS `compagnia` (
   `codcompagnia` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `nome` char(50) DEFAULT NULL,
   `nazione` char(50) DEFAULT NULL,
   PRIMARY KEY (`codcompagnia`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dump dei dati della tabella aeroporti.compagnia: ~7 rows (circa)
+-- Dump dei dati della tabella aeroporti-ibrido.compagnia: ~7 rows (circa)
 /*!40000 ALTER TABLE `compagnia` DISABLE KEYS */;
 INSERT INTO `compagnia` (`codcompagnia`, `nome`, `nazione`) VALUES
 	(1, 'Lufthansa', 'Germania'),
@@ -7245,7 +7246,7 @@ INSERT INTO `compagnia` (`codcompagnia`, `nome`, `nazione`) VALUES
 	(7, 'Alitalia', 'Italia');
 /*!40000 ALTER TABLE `compagnia` ENABLE KEYS */;
 
--- Dump della struttura di tabella aeroporti.copilota
+-- Dump della struttura di tabella aeroporti-ibrido.copilota
 CREATE TABLE IF NOT EXISTS `copilota` (
   `codvolo` int(10) unsigned NOT NULL,
   `codpilota` int(10) unsigned NOT NULL,
@@ -7253,9 +7254,9 @@ CREATE TABLE IF NOT EXISTS `copilota` (
   KEY `FK_copiloti_pilota` (`codpilota`),
   CONSTRAINT `FK_copiloti_pilota` FOREIGN KEY (`codpilota`) REFERENCES `pilota` (`codpilota`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK_copiloti_volo` FOREIGN KEY (`codvolo`) REFERENCES `volo` (`codvolo`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dump dei dati della tabella aeroporti.copilota: ~151 rows (circa)
+-- Dump dei dati della tabella aeroporti-ibrido.copilota: ~151 rows (circa)
 /*!40000 ALTER TABLE `copilota` DISABLE KEYS */;
 INSERT INTO `copilota` (`codvolo`, `codpilota`) VALUES
 	(1, 25),
@@ -7411,7 +7412,7 @@ INSERT INTO `copilota` (`codvolo`, `codpilota`) VALUES
 	(100, 21);
 /*!40000 ALTER TABLE `copilota` ENABLE KEYS */;
 
--- Dump della struttura di tabella aeroporti.durata_volo
+-- Dump della struttura di tabella aeroporti-ibrido.durata_volo
 CREATE TABLE IF NOT EXISTS `durata_volo` (
   `partenza` int(10) unsigned NOT NULL,
   `arrivo` int(10) unsigned NOT NULL,
@@ -7420,9 +7421,9 @@ CREATE TABLE IF NOT EXISTS `durata_volo` (
   KEY `FK_durate_voli_aeroporto_2` (`arrivo`),
   CONSTRAINT `FK_durate_voli_aeroporto` FOREIGN KEY (`partenza`) REFERENCES `aeroporto` (`codaeroporto`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK_durate_voli_aeroporto_2` FOREIGN KEY (`arrivo`) REFERENCES `aeroporto` (`codaeroporto`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dump dei dati della tabella aeroporti.durata_volo: ~78 rows (circa)
+-- Dump dei dati della tabella aeroporti-ibrido.durata_volo: ~78 rows (circa)
 /*!40000 ALTER TABLE `durata_volo` DISABLE KEYS */;
 INSERT INTO `durata_volo` (`partenza`, `arrivo`, `durata`) VALUES
 	(2, 3, '02:00:00'),
@@ -7505,7 +7506,7 @@ INSERT INTO `durata_volo` (`partenza`, `arrivo`, `durata`) VALUES
 	(1, 13, '02:07:00');
 /*!40000 ALTER TABLE `durata_volo` ENABLE KEYS */;
 
--- Dump della struttura di vista aeroporti.durata_volo_con_nomi
+-- Dump della struttura di vista aeroporti-ibrido.durata_volo_con_nomi
 -- Creazione di una tabella temporanea per risolvere gli errori di dipendenza della vista
 CREATE TABLE `durata_volo_con_nomi` (
 	`partenza` CHAR(50) NULL COLLATE 'utf8mb4_general_ci',
@@ -7513,7 +7514,7 @@ CREATE TABLE `durata_volo_con_nomi` (
 	`durata` TIME NULL
 ) ENGINE=MyISAM;
 
--- Dump della struttura di tabella aeroporti.modello
+-- Dump della struttura di tabella aeroporti-ibrido.modello
 CREATE TABLE IF NOT EXISTS `modello` (
   `codmodello` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `marca` char(50) DEFAULT NULL,
@@ -7524,9 +7525,9 @@ CREATE TABLE IF NOT EXISTS `modello` (
   `peso_vuoto` float unsigned DEFAULT NULL,
   `peso_massimo` float unsigned DEFAULT NULL,
   PRIMARY KEY (`codmodello`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dump dei dati della tabella aeroporti.modello: ~13 rows (circa)
+-- Dump dei dati della tabella aeroporti-ibrido.modello: ~13 rows (circa)
 /*!40000 ALTER TABLE `modello` DISABLE KEYS */;
 INSERT INTO `modello` (`codmodello`, `marca`, `nome`, `nposti`, `lunghezza`, `apertura_alare`, `peso_vuoto`, `peso_massimo`) VALUES
 	(1, 'Airbus', 'A320', 195, 37.57, 34.1, 42600, 73000),
@@ -7544,7 +7545,7 @@ INSERT INTO `modello` (`codmodello`, `marca`, `nome`, `nposti`, `lunghezza`, `ap
 	(13, 'ATR', '72', 74, NULL, NULL, NULL, NULL);
 /*!40000 ALTER TABLE `modello` ENABLE KEYS */;
 
--- Dump della struttura di tabella aeroporti.pilota
+-- Dump della struttura di tabella aeroporti-ibrido.pilota
 CREATE TABLE IF NOT EXISTS `pilota` (
   `codpilota` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `cognome` char(50) DEFAULT NULL,
@@ -7552,9 +7553,9 @@ CREATE TABLE IF NOT EXISTS `pilota` (
   `nazionalita` char(50) DEFAULT NULL,
   `stipendio` int(10) unsigned DEFAULT NULL,
   PRIMARY KEY (`codpilota`)
-) ENGINE=InnoDB AUTO_INCREMENT=73 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=73 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dump dei dati della tabella aeroporti.pilota: ~50 rows (circa)
+-- Dump dei dati della tabella aeroporti-ibrido.pilota: ~50 rows (circa)
 /*!40000 ALTER TABLE `pilota` DISABLE KEYS */;
 INSERT INTO `pilota` (`codpilota`, `cognome`, `nome`, `nazionalita`, `stipendio`) VALUES
 	(10, 'Bergonzi', 'Martina', NULL, NULL),
@@ -7609,7 +7610,7 @@ INSERT INTO `pilota` (`codpilota`, `cognome`, `nome`, `nazionalita`, `stipendio`
 	(59, 'Trimbaci', 'Daniel', NULL, NULL);
 /*!40000 ALTER TABLE `pilota` ENABLE KEYS */;
 
--- Dump della struttura di tabella aeroporti.vola
+-- Dump della struttura di tabella aeroporti-ibrido.vola
 CREATE TABLE IF NOT EXISTS `vola` (
   `codcliente` int(10) unsigned NOT NULL,
   `codvolo` int(10) unsigned NOT NULL,
@@ -7617,9 +7618,9 @@ CREATE TABLE IF NOT EXISTS `vola` (
   KEY `FK_vola_volo` (`codvolo`),
   CONSTRAINT `FK_vola_cliente` FOREIGN KEY (`codcliente`) REFERENCES `cliente` (`codcliente`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK_vola_volo` FOREIGN KEY (`codvolo`) REFERENCES `volo` (`codvolo`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dump dei dati della tabella aeroporti.vola: ~18.180 rows (circa)
+-- Dump dei dati della tabella aeroporti-ibrido.vola: ~18.119 rows (circa)
 /*!40000 ALTER TABLE `vola` DISABLE KEYS */;
 INSERT INTO `vola` (`codcliente`, `codvolo`) VALUES
 	(1, 49),
@@ -25744,7 +25745,7 @@ INSERT INTO `vola` (`codcliente`, `codvolo`) VALUES
 	(3000, 100);
 /*!40000 ALTER TABLE `vola` ENABLE KEYS */;
 
--- Dump della struttura di vista aeroporti.vola_con_info
+-- Dump della struttura di vista aeroporti-ibrido.vola_con_info
 -- Creazione di una tabella temporanea per risolvere gli errori di dipendenza della vista
 CREATE TABLE `vola_con_info` (
 	`datapartenza` DATE NULL,
@@ -25759,7 +25760,7 @@ CREATE TABLE `vola_con_info` (
 	`dn_accompagnatore` DATE NULL
 ) ENGINE=MyISAM;
 
--- Dump della struttura di tabella aeroporti.volo
+-- Dump della struttura di tabella aeroporti-ibrido.volo
 CREATE TABLE IF NOT EXISTS `volo` (
   `codvolo` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `aeroportopartenza` int(10) unsigned DEFAULT NULL,
@@ -25770,6 +25771,8 @@ CREATE TABLE IF NOT EXISTS `volo` (
   `oraarrivo` time DEFAULT NULL,
   `aereo` int(10) unsigned DEFAULT NULL,
   `comandante` int(10) unsigned DEFAULT NULL,
+  `partenza` datetime DEFAULT NULL,
+  `arrivo` datetime DEFAULT NULL,
   PRIMARY KEY (`codvolo`),
   KEY `FK_volo_aeroporto` (`aeroportopartenza`),
   KEY `FK_volo_aeroporto_2` (`aeroportoarrivo`),
@@ -25779,114 +25782,114 @@ CREATE TABLE IF NOT EXISTS `volo` (
   CONSTRAINT `FK_volo_aeroporto` FOREIGN KEY (`aeroportopartenza`) REFERENCES `aeroporto` (`codaeroporto`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `FK_volo_aeroporto_2` FOREIGN KEY (`aeroportoarrivo`) REFERENCES `aeroporto` (`codaeroporto`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `FK_volo_pilota` FOREIGN KEY (`comandante`) REFERENCES `pilota` (`codpilota`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dump dei dati della tabella aeroporti.volo: ~100 rows (circa)
+-- Dump dei dati della tabella aeroporti-ibrido.volo: ~100 rows (circa)
 /*!40000 ALTER TABLE `volo` DISABLE KEYS */;
-INSERT INTO `volo` (`codvolo`, `aeroportopartenza`, `datapartenza`, `orapartenza`, `aeroportoarrivo`, `dataarrivo`, `oraarrivo`, `aereo`, `comandante`) VALUES
-	(1, 9, '2020-12-04', '06:20:00', 10, '2020-12-04', '06:33:00', 9, 30),
-	(2, 5, '2020-02-14', '12:45:00', 13, '2020-02-14', '15:04:00', 41, 17),
-	(3, 3, '2021-01-22', '02:00:00', 9, '2021-01-22', '05:04:00', 19, 50),
-	(4, 3, '2020-06-16', '12:07:00', 5, '2020-06-16', '12:36:00', 40, 19),
-	(5, 10, '2021-12-12', '12:46:00', 13, '2021-12-12', '15:01:00', 20, 57),
-	(6, 4, '2021-10-02', '19:25:00', 5, '2021-10-02', '21:05:00', 10, 33),
-	(7, 2, '2020-02-15', '17:07:00', 3, '2020-02-15', '19:07:00', 1, 31),
-	(8, 3, '2021-04-11', '06:55:00', 5, '2021-04-11', '07:24:00', 3, 32),
-	(9, 4, '2020-09-16', '20:41:00', 11, '2020-09-16', '21:57:00', 34, 57),
-	(10, 6, '2021-04-11', '09:57:00', 13, '2021-04-11', '12:12:00', 56, 10),
-	(11, 6, '2020-01-27', '06:20:00', 9, '2020-01-27', '08:11:00', 45, 10),
-	(12, 2, '2021-07-15', '09:35:00', 12, '2021-07-15', '11:06:00', 26, 54),
-	(13, 7, '2020-12-30', '04:34:00', 9, '2020-12-30', '04:44:00', 23, 17),
-	(14, 3, '2020-03-16', '09:07:00', 11, '2020-03-16', '11:29:00', 39, 23),
-	(15, 3, '2021-11-01', '15:20:00', 4, '2021-11-01', '17:16:00', 19, 37),
-	(16, 8, '2020-06-21', '01:06:00', 9, '2020-06-21', '02:01:00', 55, 43),
-	(17, 3, '2021-08-16', '22:04:00', 9, '2021-08-17', '01:08:00', 60, 57),
-	(18, 7, '2020-04-26', '02:40:00', 13, '2020-04-26', '04:58:00', 15, 17),
-	(19, 4, '2021-04-27', '16:30:00', 8, '2021-04-27', '18:11:00', 4, 29),
-	(20, 1, '2021-09-28', '14:24:00', 3, '2021-09-28', '15:46:00', 37, 49),
-	(21, 4, '2020-12-11', '19:06:00', 6, '2020-12-11', '19:12:00', 24, 40),
-	(22, 10, '2020-07-23', '12:24:00', 12, '2020-07-23', '13:14:00', 4, 44),
-	(23, 12, '2021-10-17', '02:47:00', 13, '2021-10-17', '04:45:00', 34, 15),
-	(24, 8, '2021-07-23', '10:11:00', 11, '2021-07-23', '11:20:00', 28, 10),
-	(25, 2, '2020-06-29', '22:26:00', 4, '2020-06-29', '22:37:00', 39, 36),
-	(26, 10, '2021-03-26', '18:32:00', 13, '2021-03-26', '20:47:00', 37, 50),
-	(27, 5, '2021-12-23', '00:54:00', 8, '2021-12-23', '03:14:00', 24, 29),
-	(28, 1, '2021-06-01', '10:29:00', 9, '2021-06-01', '12:47:00', 58, 45),
-	(29, 8, '2021-07-23', '07:47:00', 9, '2021-07-23', '08:42:00', 9, 52),
-	(30, 3, '2021-11-22', '23:00:00', 9, '2021-11-23', '02:04:00', 19, 16),
-	(31, 3, '2021-08-31', '18:07:00', 11, '2021-08-31', '20:29:00', 5, 34),
-	(32, 3, '2020-02-16', '01:13:00', 4, '2020-02-16', '03:09:00', 11, 51),
-	(33, 6, '2020-05-09', '09:38:00', 7, '2020-05-09', '11:30:00', 57, 29),
-	(34, 2, '2020-08-13', '01:44:00', 4, '2020-08-13', '01:55:00', 15, 57),
-	(35, 4, '2020-11-28', '04:18:00', 12, '2020-11-28', '05:58:00', 53, 47),
-	(36, 2, '2021-12-15', '05:34:00', 12, '2021-12-15', '07:05:00', 21, 43),
-	(37, 6, '2020-02-15', '05:27:00', 12, '2020-02-15', '07:05:00', 14, 50),
-	(38, 1, '2021-03-03', '04:19:00', 7, '2021-03-03', '06:37:00', 19, 21),
-	(39, 1, '2021-05-02', '20:14:00', 13, '2021-05-02', '22:21:00', 47, 58),
-	(40, 4, '2020-06-12', '12:29:00', 5, '2020-06-12', '14:09:00', 28, 35),
-	(41, 2, '2021-03-21', '17:54:00', 6, '2021-03-21', '18:01:00', 57, 48),
-	(42, 10, '2021-05-01', '01:07:00', 11, '2021-05-01', '02:44:00', 4, 28),
-	(43, 4, '2021-02-09', '18:33:00', 11, '2021-02-09', '19:49:00', 58, 51),
-	(44, 7, '2020-07-17', '18:28:00', 13, '2020-07-17', '20:46:00', 31, 23),
-	(45, 9, '2021-07-06', '21:43:00', 12, '2021-07-06', '22:42:00', 11, 39),
-	(46, 1, '2020-09-09', '11:35:00', 4, '2020-09-09', '12:49:00', 39, 26),
-	(47, 1, '2021-07-11', '17:04:00', 10, '2021-07-11', '19:18:00', 46, 14),
-	(48, 9, '2020-01-16', '22:58:00', 10, '2020-01-16', '23:11:00', 37, 36),
-	(49, 5, '2021-01-13', '06:10:00', 12, '2021-01-13', '08:29:00', 12, 53),
-	(50, 1, '2020-12-10', '17:21:00', 7, '2020-12-10', '19:39:00', 41, 11),
-	(51, 11, '2020-04-09', '22:48:00', 12, '2020-04-10', '00:00:00', 5, 52),
-	(52, 7, '2021-05-22', '19:19:00', 13, '2021-05-22', '21:37:00', 23, 50),
-	(53, 3, '2020-10-20', '23:46:00', 11, '2020-10-21', '02:08:00', 6, 49),
-	(54, 4, '2020-09-25', '05:49:00', 8, '2020-09-25', '07:30:00', 23, 25),
-	(55, 2, '2020-02-06', '01:45:00', 3, '2020-02-06', '03:45:00', 19, 26),
-	(56, 4, '2021-07-10', '08:21:00', 5, '2021-07-10', '10:01:00', 30, 29),
-	(57, 9, '2020-02-27', '18:28:00', 11, '2020-02-27', '20:03:00', 14, 40),
-	(58, 1, '2020-07-01', '12:02:00', 13, '2020-07-01', '14:09:00', 9, 43),
-	(59, 7, '2020-05-04', '22:03:00', 11, '2020-05-04', '23:44:00', 11, 34),
-	(60, 8, '2020-06-18', '05:58:00', 11, '2020-06-18', '07:07:00', 60, 36),
-	(61, 9, '2021-08-05', '06:10:00', 12, '2021-08-05', '07:09:00', 30, 33),
-	(62, 4, '2020-04-11', '23:41:00', 6, '2020-04-11', '23:47:00', 42, 19),
-	(63, 11, '2021-06-03', '10:21:00', 12, '2021-06-03', '11:33:00', 39, 56),
-	(64, 6, '2021-10-28', '16:54:00', 9, '2021-10-28', '18:45:00', 16, 54),
-	(65, 3, '2020-04-13', '19:29:00', 11, '2020-04-13', '21:51:00', 1, 29),
-	(66, 2, '2020-09-27', '01:27:00', 7, '2020-09-27', '03:14:00', 51, 40),
-	(67, 5, '2020-10-27', '17:55:00', 11, '2020-10-27', '20:05:00', 39, 42),
-	(68, 3, '2021-08-10', '04:30:00', 8, '2021-08-10', '07:02:00', 56, 16),
-	(69, 6, '2020-10-08', '08:46:00', 12, '2020-10-08', '10:24:00', 54, 31),
-	(70, 2, '2020-05-13', '12:01:00', 6, '2020-05-13', '12:08:00', 32, 50),
-	(71, 7, '2020-06-13', '07:47:00', 12, '2020-06-13', '08:43:00', 16, 59),
-	(72, 1, '2021-07-29', '05:06:00', 4, '2021-07-29', '06:20:00', 38, 16),
-	(73, 8, '2021-02-24', '23:12:00', 12, '2021-02-24', '23:16:00', 16, 40),
-	(74, 7, '2021-05-23', '21:29:00', 9, '2021-05-23', '21:39:00', 25, 31),
-	(75, 1, '2021-12-01', '13:15:00', 8, '2021-12-01', '15:21:00', 17, 47),
-	(76, 1, '2020-04-23', '01:27:00', 9, '2020-04-23', '03:45:00', 32, 39),
-	(77, 1, '2021-07-06', '04:57:00', 4, '2021-07-06', '06:11:00', 12, 46),
-	(78, 4, '2021-06-16', '01:14:00', 12, '2021-06-16', '02:54:00', 51, 57),
-	(79, 4, '2021-03-12', '08:38:00', 9, '2021-03-12', '10:30:00', 5, 26),
-	(80, 3, '2021-01-23', '14:36:00', 7, '2021-01-23', '17:40:00', 25, 49),
-	(81, 1, '2021-12-14', '01:50:00', 7, '2021-12-14', '04:08:00', 21, 47),
-	(82, 7, '2020-10-09', '17:56:00', 9, '2020-10-09', '18:06:00', 32, 24),
-	(83, 7, '2021-09-08', '04:13:00', 11, '2021-09-08', '05:54:00', 23, 47),
-	(84, 4, '2021-10-19', '01:35:00', 10, '2021-10-19', '03:23:00', 6, 25),
-	(85, 2, '2020-11-17', '04:14:00', 9, '2020-11-17', '06:00:00', 13, 35),
-	(86, 3, '2021-04-09', '01:33:00', 8, '2021-04-09', '04:05:00', 35, 20),
-	(87, 7, '2021-02-13', '01:24:00', 10, '2021-02-13', '01:30:00', 43, 20),
-	(88, 5, '2021-02-26', '12:17:00', 11, '2021-02-26', '14:27:00', 18, 50),
-	(89, 2, '2020-12-31', '17:13:00', 9, '2020-12-31', '18:59:00', 28, 53),
-	(90, 2, '2020-01-28', '05:53:00', 3, '2020-01-28', '07:53:00', 48, 39),
-	(91, 6, '2020-05-05', '10:25:00', 9, '2020-05-05', '12:16:00', 25, 20),
-	(92, 7, '2021-08-26', '17:31:00', 11, '2021-08-26', '19:12:00', 39, 31),
-	(93, 3, '2020-08-17', '07:01:00', 5, '2020-08-17', '07:30:00', 59, 30),
-	(94, 8, '2020-09-03', '14:30:00', 11, '2020-09-03', '15:39:00', 18, 26),
-	(95, 1, '2021-08-27', '04:57:00', 2, '2021-08-27', '06:15:00', 21, 38),
-	(96, 3, '2020-08-01', '23:55:00', 8, '2020-08-02', '02:27:00', 55, 51),
-	(97, 5, '2020-02-25', '01:02:00', 9, '2020-02-25', '03:51:00', 14, 10),
-	(98, 9, '2020-10-04', '12:00:00', 13, '2020-10-04', '14:04:00', 8, 45),
-	(99, 9, '2021-03-15', '20:43:00', 13, '2021-03-15', '22:47:00', 57, 42),
-	(100, 1, '2021-11-01', '07:27:00', 7, '2021-11-01', '09:45:00', 50, 13);
+INSERT INTO `volo` (`codvolo`, `aeroportopartenza`, `datapartenza`, `orapartenza`, `aeroportoarrivo`, `dataarrivo`, `oraarrivo`, `aereo`, `comandante`, `partenza`, `arrivo`) VALUES
+	(1, 9, '2020-12-04', '06:20:00', 10, '2020-12-04', '06:33:00', 9, 30, '2020-12-04 06:20:00', '2020-12-04 06:33:00'),
+	(2, 5, '2020-02-14', '12:45:00', 13, '2020-02-14', '15:04:00', 41, 17, '2020-02-14 12:45:00', '2020-02-14 15:04:00'),
+	(3, 3, '2021-01-22', '02:00:00', 9, '2021-01-22', '05:04:00', 19, 50, '2021-01-22 02:00:00', '2021-01-22 05:04:00'),
+	(4, 3, '2020-06-16', '12:07:00', 5, '2020-06-16', '12:36:00', 40, 19, '2020-06-16 12:07:00', '2020-06-16 12:36:00'),
+	(5, 10, '2021-12-12', '12:46:00', 13, '2021-12-12', '15:01:00', 20, 57, '2021-12-12 12:46:00', '2021-12-12 15:01:00'),
+	(6, 4, '2021-10-02', '19:25:00', 5, '2021-10-02', '21:05:00', 10, 33, '2021-10-02 19:25:00', '2021-10-02 21:05:00'),
+	(7, 2, '2020-02-15', '17:07:00', 3, '2020-02-15', '19:07:00', 1, 31, '2020-02-15 17:07:00', '2020-02-15 19:07:00'),
+	(8, 3, '2021-04-11', '06:55:00', 5, '2021-04-11', '07:24:00', 3, 32, '2021-04-11 06:55:00', '2021-04-11 07:24:00'),
+	(9, 4, '2020-09-16', '20:41:00', 11, '2020-09-16', '21:57:00', 34, 57, '2020-09-16 20:41:00', '2020-09-16 21:57:00'),
+	(10, 6, '2021-04-11', '09:57:00', 13, '2021-04-11', '12:12:00', 56, 10, '2021-04-11 09:57:00', '2021-04-11 12:12:00'),
+	(11, 6, '2020-01-27', '06:20:00', 9, '2020-01-27', '08:11:00', 45, 10, '2020-01-27 06:20:00', '2020-01-27 08:11:00'),
+	(12, 2, '2021-07-15', '09:35:00', 12, '2021-07-15', '11:06:00', 26, 54, '2021-07-15 09:35:00', '2021-07-15 11:06:00'),
+	(13, 7, '2020-12-30', '04:34:00', 9, '2020-12-30', '04:44:00', 23, 17, '2020-12-30 04:34:00', '2020-12-30 04:44:00'),
+	(14, 3, '2020-03-16', '09:07:00', 11, '2020-03-16', '11:29:00', 39, 23, '2020-03-16 09:07:00', '2020-03-16 11:29:00'),
+	(15, 3, '2021-11-01', '15:20:00', 4, '2021-11-01', '17:16:00', 19, 37, '2021-11-01 15:20:00', '2021-11-01 17:16:00'),
+	(16, 8, '2020-06-21', '01:06:00', 9, '2020-06-21', '02:01:00', 55, 43, '2020-06-21 01:06:00', '2020-06-21 02:01:00'),
+	(17, 3, '2021-08-16', '22:04:00', 9, '2021-08-17', '01:08:00', 60, 57, '2021-08-16 22:04:00', '2021-08-17 01:08:00'),
+	(18, 7, '2020-04-26', '02:40:00', 13, '2020-04-26', '04:58:00', 15, 17, '2020-04-26 02:40:00', '2020-04-26 04:58:00'),
+	(19, 4, '2021-04-27', '16:30:00', 8, '2021-04-27', '18:11:00', 4, 29, '2021-04-27 16:30:00', '2021-04-27 18:11:00'),
+	(20, 1, '2021-09-28', '14:24:00', 3, '2021-09-28', '15:46:00', 37, 49, '2021-09-28 14:24:00', '2021-09-28 15:46:00'),
+	(21, 4, '2020-12-11', '19:06:00', 6, '2020-12-11', '19:12:00', 24, 40, '2020-12-11 19:06:00', '2020-12-11 19:12:00'),
+	(22, 10, '2020-07-23', '12:24:00', 12, '2020-07-23', '13:14:00', 4, 44, '2020-07-23 12:24:00', '2020-07-23 13:14:00'),
+	(23, 12, '2021-10-17', '02:47:00', 13, '2021-10-17', '04:45:00', 34, 15, '2021-10-17 02:47:00', '2021-10-17 04:45:00'),
+	(24, 8, '2021-07-23', '10:11:00', 11, '2021-07-23', '11:20:00', 28, 10, '2021-07-23 10:11:00', '2021-07-23 11:20:00'),
+	(25, 2, '2020-06-29', '22:26:00', 4, '2020-06-29', '22:37:00', 39, 36, '2020-06-29 22:26:00', '2020-06-29 22:37:00'),
+	(26, 10, '2021-03-26', '18:32:00', 13, '2021-03-26', '20:47:00', 37, 50, '2021-03-26 18:32:00', '2021-03-26 20:47:00'),
+	(27, 5, '2021-12-23', '00:54:00', 8, '2021-12-23', '03:14:00', 24, 29, '2021-12-23 00:54:00', '2021-12-23 03:14:00'),
+	(28, 1, '2021-06-01', '10:29:00', 9, '2021-06-01', '12:47:00', 58, 45, '2021-06-01 10:29:00', '2021-06-01 12:47:00'),
+	(29, 8, '2021-07-23', '07:47:00', 9, '2021-07-23', '08:42:00', 9, 52, '2021-07-23 07:47:00', '2021-07-23 08:42:00'),
+	(30, 3, '2021-11-22', '23:00:00', 9, '2021-11-23', '02:04:00', 19, 16, '2021-11-22 23:00:00', '2021-11-23 02:04:00'),
+	(31, 3, '2021-08-31', '18:07:00', 11, '2021-08-31', '20:29:00', 5, 34, '2021-08-31 18:07:00', '2021-08-31 20:29:00'),
+	(32, 3, '2020-02-16', '01:13:00', 4, '2020-02-16', '03:09:00', 11, 51, '2020-02-16 01:13:00', '2020-02-16 03:09:00'),
+	(33, 6, '2020-05-09', '09:38:00', 7, '2020-05-09', '11:30:00', 57, 29, '2020-05-09 09:38:00', '2020-05-09 11:30:00'),
+	(34, 2, '2020-08-13', '01:44:00', 4, '2020-08-13', '01:55:00', 15, 57, '2020-08-13 01:44:00', '2020-08-13 01:55:00'),
+	(35, 4, '2020-11-28', '04:18:00', 12, '2020-11-28', '05:58:00', 53, 47, '2020-11-28 04:18:00', '2020-11-28 05:58:00'),
+	(36, 2, '2021-12-15', '05:34:00', 12, '2021-12-15', '07:05:00', 21, 43, '2021-12-15 05:34:00', '2021-12-15 07:05:00'),
+	(37, 6, '2020-02-15', '05:27:00', 12, '2020-02-15', '07:05:00', 14, 50, '2020-02-15 05:27:00', '2020-02-15 07:05:00'),
+	(38, 1, '2021-03-03', '04:19:00', 7, '2021-03-03', '06:37:00', 19, 21, '2021-03-03 04:19:00', '2021-03-03 06:37:00'),
+	(39, 1, '2021-05-02', '20:14:00', 13, '2021-05-02', '22:21:00', 47, 58, '2021-05-02 20:14:00', '2021-05-02 22:21:00'),
+	(40, 4, '2020-06-12', '12:29:00', 5, '2020-06-12', '14:09:00', 28, 35, '2020-06-12 12:29:00', '2020-06-12 14:09:00'),
+	(41, 2, '2021-03-21', '17:54:00', 6, '2021-03-21', '18:01:00', 57, 48, '2021-03-21 17:54:00', '2021-03-21 18:01:00'),
+	(42, 10, '2021-05-01', '01:07:00', 11, '2021-05-01', '02:44:00', 4, 28, '2021-05-01 01:07:00', '2021-05-01 02:44:00'),
+	(43, 4, '2021-02-09', '18:33:00', 11, '2021-02-09', '19:49:00', 58, 51, '2021-02-09 18:33:00', '2021-02-09 19:49:00'),
+	(44, 7, '2020-07-17', '18:28:00', 13, '2020-07-17', '20:46:00', 31, 23, '2020-07-17 18:28:00', '2020-07-17 20:46:00'),
+	(45, 9, '2021-07-06', '21:43:00', 12, '2021-07-06', '22:42:00', 11, 39, '2021-07-06 21:43:00', '2021-07-06 22:42:00'),
+	(46, 1, '2020-09-09', '11:35:00', 4, '2020-09-09', '12:49:00', 39, 26, '2020-09-09 11:35:00', '2020-09-09 12:49:00'),
+	(47, 1, '2021-07-11', '17:04:00', 10, '2021-07-11', '19:18:00', 46, 14, '2021-07-11 17:04:00', '2021-07-11 19:18:00'),
+	(48, 9, '2020-01-16', '22:58:00', 10, '2020-01-16', '23:11:00', 37, 36, '2020-01-16 22:58:00', '2020-01-16 23:11:00'),
+	(49, 5, '2021-01-13', '06:10:00', 12, '2021-01-13', '08:29:00', 12, 53, '2021-01-13 06:10:00', '2021-01-13 08:29:00'),
+	(50, 1, '2020-12-10', '17:21:00', 7, '2020-12-10', '19:39:00', 41, 11, '2020-12-10 17:21:00', '2020-12-10 19:39:00'),
+	(51, 11, '2020-04-09', '22:48:00', 12, '2020-04-10', '00:00:00', 5, 52, '2020-04-09 22:48:00', '2020-04-10 00:00:00'),
+	(52, 7, '2021-05-22', '19:19:00', 13, '2021-05-22', '21:37:00', 23, 50, '2021-05-22 19:19:00', '2021-05-22 21:37:00'),
+	(53, 3, '2020-10-20', '23:46:00', 11, '2020-10-21', '02:08:00', 6, 49, '2020-10-20 23:46:00', '2020-10-21 02:08:00'),
+	(54, 4, '2020-09-25', '05:49:00', 8, '2020-09-25', '07:30:00', 23, 25, '2020-09-25 05:49:00', '2020-09-25 07:30:00'),
+	(55, 2, '2020-02-06', '01:45:00', 3, '2020-02-06', '03:45:00', 19, 26, '2020-02-06 01:45:00', '2020-02-06 03:45:00'),
+	(56, 4, '2021-07-10', '08:21:00', 5, '2021-07-10', '10:01:00', 30, 29, '2021-07-10 08:21:00', '2021-07-10 10:01:00'),
+	(57, 9, '2020-02-27', '18:28:00', 11, '2020-02-27', '20:03:00', 14, 40, '2020-02-27 18:28:00', '2020-02-27 20:03:00'),
+	(58, 1, '2020-07-01', '12:02:00', 13, '2020-07-01', '14:09:00', 9, 43, '2020-07-01 12:02:00', '2020-07-01 14:09:00'),
+	(59, 7, '2020-05-04', '22:03:00', 11, '2020-05-04', '23:44:00', 11, 34, '2020-05-04 22:03:00', '2020-05-04 23:44:00'),
+	(60, 8, '2020-06-18', '05:58:00', 11, '2020-06-18', '07:07:00', 60, 36, '2020-06-18 05:58:00', '2020-06-18 07:07:00'),
+	(61, 9, '2021-08-05', '06:10:00', 12, '2021-08-05', '07:09:00', 30, 33, '2021-08-05 06:10:00', '2021-08-05 07:09:00'),
+	(62, 4, '2020-04-11', '23:41:00', 6, '2020-04-11', '23:47:00', 42, 19, '2020-04-11 23:41:00', '2020-04-11 23:47:00'),
+	(63, 11, '2021-06-03', '10:21:00', 12, '2021-06-03', '11:33:00', 39, 56, '2021-06-03 10:21:00', '2021-06-03 11:33:00'),
+	(64, 6, '2021-10-28', '16:54:00', 9, '2021-10-28', '18:45:00', 16, 54, '2021-10-28 16:54:00', '2021-10-28 18:45:00'),
+	(65, 3, '2020-04-13', '19:29:00', 11, '2020-04-13', '21:51:00', 1, 29, '2020-04-13 19:29:00', '2020-04-13 21:51:00'),
+	(66, 2, '2020-09-27', '01:27:00', 7, '2020-09-27', '03:14:00', 51, 40, '2020-09-27 01:27:00', '2020-09-27 03:14:00'),
+	(67, 5, '2020-10-27', '17:55:00', 11, '2020-10-27', '20:05:00', 39, 42, '2020-10-27 17:55:00', '2020-10-27 20:05:00'),
+	(68, 3, '2021-08-10', '04:30:00', 8, '2021-08-10', '07:02:00', 56, 16, '2021-08-10 04:30:00', '2021-08-10 07:02:00'),
+	(69, 6, '2020-10-08', '08:46:00', 12, '2020-10-08', '10:24:00', 54, 31, '2020-10-08 08:46:00', '2020-10-08 10:24:00'),
+	(70, 2, '2020-05-13', '12:01:00', 6, '2020-05-13', '12:08:00', 32, 50, '2020-05-13 12:01:00', '2020-05-13 12:08:00'),
+	(71, 7, '2020-06-13', '07:47:00', 12, '2020-06-13', '08:43:00', 16, 59, '2020-06-13 07:47:00', '2020-06-13 08:43:00'),
+	(72, 1, '2021-07-29', '05:06:00', 4, '2021-07-29', '06:20:00', 38, 16, '2021-07-29 05:06:00', '2021-07-29 06:20:00'),
+	(73, 8, '2021-02-24', '23:12:00', 12, '2021-02-24', '23:16:00', 16, 40, '2021-02-24 23:12:00', '2021-02-24 23:16:00'),
+	(74, 7, '2021-05-23', '21:29:00', 9, '2021-05-23', '21:39:00', 25, 31, '2021-05-23 21:29:00', '2021-05-23 21:39:00'),
+	(75, 1, '2021-12-01', '13:15:00', 8, '2021-12-01', '15:21:00', 17, 47, '2021-12-01 13:15:00', '2021-12-01 15:21:00'),
+	(76, 1, '2020-04-23', '01:27:00', 9, '2020-04-23', '03:45:00', 32, 39, '2020-04-23 01:27:00', '2020-04-23 03:45:00'),
+	(77, 1, '2021-07-06', '04:57:00', 4, '2021-07-06', '06:11:00', 12, 46, '2021-07-06 04:57:00', '2021-07-06 06:11:00'),
+	(78, 4, '2021-06-16', '01:14:00', 12, '2021-06-16', '02:54:00', 51, 57, '2021-06-16 01:14:00', '2021-06-16 02:54:00'),
+	(79, 4, '2021-03-12', '08:38:00', 9, '2021-03-12', '10:30:00', 5, 26, '2021-03-12 08:38:00', '2021-03-12 10:30:00'),
+	(80, 3, '2021-01-23', '14:36:00', 7, '2021-01-23', '17:40:00', 25, 49, '2021-01-23 14:36:00', '2021-01-23 17:40:00'),
+	(81, 1, '2021-12-14', '01:50:00', 7, '2021-12-14', '04:08:00', 21, 47, '2021-12-14 01:50:00', '2021-12-14 04:08:00'),
+	(82, 7, '2020-10-09', '17:56:00', 9, '2020-10-09', '18:06:00', 32, 24, '2020-10-09 17:56:00', '2020-10-09 18:06:00'),
+	(83, 7, '2021-09-08', '04:13:00', 11, '2021-09-08', '05:54:00', 23, 47, '2021-09-08 04:13:00', '2021-09-08 05:54:00'),
+	(84, 4, '2021-10-19', '01:35:00', 10, '2021-10-19', '03:23:00', 6, 25, '2021-10-19 01:35:00', '2021-10-19 03:23:00'),
+	(85, 2, '2020-11-17', '04:14:00', 9, '2020-11-17', '06:00:00', 13, 35, '2020-11-17 04:14:00', '2020-11-17 06:00:00'),
+	(86, 3, '2021-04-09', '01:33:00', 8, '2021-04-09', '04:05:00', 35, 20, '2021-04-09 01:33:00', '2021-04-09 04:05:00'),
+	(87, 7, '2021-02-13', '01:24:00', 10, '2021-02-13', '01:30:00', 43, 20, '2021-02-13 01:24:00', '2021-02-13 01:30:00'),
+	(88, 5, '2021-02-26', '12:17:00', 11, '2021-02-26', '14:27:00', 18, 50, '2021-02-26 12:17:00', '2021-02-26 14:27:00'),
+	(89, 2, '2020-12-31', '17:13:00', 9, '2020-12-31', '18:59:00', 28, 53, '2020-12-31 17:13:00', '2020-12-31 18:59:00'),
+	(90, 2, '2020-01-28', '05:53:00', 3, '2020-01-28', '07:53:00', 48, 39, '2020-01-28 05:53:00', '2020-01-28 07:53:00'),
+	(91, 6, '2020-05-05', '10:25:00', 9, '2020-05-05', '12:16:00', 25, 20, '2020-05-05 10:25:00', '2020-05-05 12:16:00'),
+	(92, 7, '2021-08-26', '17:31:00', 11, '2021-08-26', '19:12:00', 39, 31, '2021-08-26 17:31:00', '2021-08-26 19:12:00'),
+	(93, 3, '2020-08-17', '07:01:00', 5, '2020-08-17', '07:30:00', 59, 30, '2020-08-17 07:01:00', '2020-08-17 07:30:00'),
+	(94, 8, '2020-09-03', '14:30:00', 11, '2020-09-03', '15:39:00', 18, 26, '2020-09-03 14:30:00', '2020-09-03 15:39:00'),
+	(95, 1, '2021-08-27', '04:57:00', 2, '2021-08-27', '06:15:00', 21, 38, '2021-08-27 04:57:00', '2021-08-27 06:15:00'),
+	(96, 3, '2020-08-01', '23:55:00', 8, '2020-08-02', '02:27:00', 55, 51, '2020-08-01 23:55:00', '2020-08-02 02:27:00'),
+	(97, 5, '2020-02-25', '01:02:00', 9, '2020-02-25', '03:51:00', 14, 10, '2020-02-25 01:02:00', '2020-02-25 03:51:00'),
+	(98, 9, '2020-10-04', '12:00:00', 13, '2020-10-04', '14:04:00', 8, 45, '2020-10-04 12:00:00', '2020-10-04 14:04:00'),
+	(99, 9, '2021-03-15', '20:43:00', 13, '2021-03-15', '22:47:00', 57, 42, '2021-03-15 20:43:00', '2021-03-15 22:47:00'),
+	(100, 1, '2021-11-01', '07:27:00', 7, '2021-11-01', '09:45:00', 50, 13, '2021-11-01 07:27:00', '2021-11-01 09:45:00');
 /*!40000 ALTER TABLE `volo` ENABLE KEYS */;
 
--- Dump della struttura di vista aeroporti.volo_con_info
+-- Dump della struttura di vista aeroporti-ibrido.volo_con_info
 -- Creazione di una tabella temporanea per risolvere gli errori di dipendenza della vista
 CREATE TABLE `volo_con_info` (
 	`partenza` CHAR(50) NULL COLLATE 'utf8mb4_general_ci',
@@ -25897,50 +25900,25 @@ CREATE TABLE `volo_con_info` (
 	`oraarrivo` TIME NULL
 ) ENGINE=MyISAM;
 
--- Dump della struttura di vista aeroporti.aereo_leggibile
+-- Dump della struttura di vista aeroporti-ibrido.aereo_leggibile
 -- Rimozione temporanea di tabella e creazione della struttura finale della vista
 DROP TABLE IF EXISTS `aereo_leggibile`;
-CREATE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `aereo_leggibile` AS SELECT aereo.codaereo, modello.codmodello, modello.marca, modello.nome AS nome_modello,
-	modello.nposti, compagnia.codcompagnia, compagnia.nome AS nome_compagnia, compagnia.nazione
-FROM aereo JOIN modello ON aereo.codmodello = modello.codmodello
-	JOIN compagnia ON aereo.codcompagnia = compagnia.codcompagnia ;
+CREATE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `aereo_leggibile` AS select `aereo`.`codaereo` AS `codaereo`,`modello`.`codmodello` AS `codmodello`,`modello`.`marca` AS `marca`,`modello`.`nome` AS `nome_modello`,`modello`.`nposti` AS `nposti`,`compagnia`.`codcompagnia` AS `codcompagnia`,`compagnia`.`nome` AS `nome_compagnia`,`compagnia`.`nazione` AS `nazione` from ((`aereo` join `modello` on(`aereo`.`codmodello` = `modello`.`codmodello`)) join `compagnia` on(`aereo`.`codcompagnia` = `compagnia`.`codcompagnia`));
 
--- Dump della struttura di vista aeroporti.durata_volo_con_nomi
+-- Dump della struttura di vista aeroporti-ibrido.durata_volo_con_nomi
 -- Rimozione temporanea di tabella e creazione della struttura finale della vista
 DROP TABLE IF EXISTS `durata_volo_con_nomi`;
-CREATE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `durata_volo_con_nomi` AS SELECT AP.localita AS partenza, AA.localita AS arrivo, durata
-FROM durata_volo JOIN aeroporto AS AP ON durata_volo.partenza = AP.codaeroporto
-	JOIN aeroporto AS AA ON durata_volo.arrivo = AA.codaeroporto WITH CASCADED CHECK OPTION ;
+CREATE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `durata_volo_con_nomi` AS select `ap`.`localita` AS `partenza`,`aa`.`localita` AS `arrivo`,`durata_volo`.`durata` AS `durata` from ((`durata_volo` join `aeroporto` `ap` on(`durata_volo`.`partenza` = `ap`.`codaeroporto`)) join `aeroporto` `aa` on(`durata_volo`.`arrivo` = `aa`.`codaeroporto`)) WITH CASCADED CHECK OPTION;
 
--- Dump della struttura di vista aeroporti.vola_con_info
+-- Dump della struttura di vista aeroporti-ibrido.vola_con_info
 -- Rimozione temporanea di tabella e creazione della struttura finale della vista
 DROP TABLE IF EXISTS `vola_con_info`;
-CREATE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `vola_con_info` AS SELECT 
-	volo.datapartenza,
-	volo.orapartenza,
-	AP.localita AS partenza,
-	AA.localita AS arrivo,
-	cliente.cognome AS cognome_cliente,
-	cliente.nome AS nome_cliente,
-	cliente.data_nascita AS dn_cliente,
-	#accompagna.accompagnatore
-	accompagnatore.cognome AS cognome_accompagnatore,
-	accompagnatore.nome AS nome_accompagnatore,
-	accompagnatore.data_nascita AS dn_accompagnatore
-FROM (((volo JOIN vola ON volo.codvolo = vola.codvolo
-	JOIN cliente ON vola.codcliente = cliente.codcliente)
-	LEFT JOIN accompagna ON (cliente.codcliente = accompagna.accompagnato 
-		AND volo.codvolo = accompagna.volo))
-	LEFT JOIN cliente AS accompagnatore ON accompagna.accompagnatore = accompagnatore.codcliente)
-	JOIN aeroporto AS AP ON volo.aeroportopartenza = AP.codaeroporto
-	JOIN aeroporto AS AA ON volo.aeroportoarrivo = AA.codaeroporto ;
+CREATE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `vola_con_info` AS select `volo`.`datapartenza` AS `datapartenza`,`volo`.`orapartenza` AS `orapartenza`,`ap`.`localita` AS `partenza`,`aa`.`localita` AS `arrivo`,`cliente`.`cognome` AS `cognome_cliente`,`cliente`.`nome` AS `nome_cliente`,`cliente`.`data_nascita` AS `dn_cliente`,`accompagnatore`.`cognome` AS `cognome_accompagnatore`,`accompagnatore`.`nome` AS `nome_accompagnatore`,`accompagnatore`.`data_nascita` AS `dn_accompagnatore` from ((((((`volo` join `vola` on(`volo`.`codvolo` = `vola`.`codvolo`)) join `cliente` on(`vola`.`codcliente` = `cliente`.`codcliente`)) left join `accompagna` on(`cliente`.`codcliente` = `accompagna`.`accompagnato` and `volo`.`codvolo` = `accompagna`.`volo`)) left join `cliente` `accompagnatore` on(`accompagna`.`accompagnatore` = `accompagnatore`.`codcliente`)) join `aeroporto` `ap` on(`volo`.`aeroportopartenza` = `ap`.`codaeroporto`)) join `aeroporto` `aa` on(`volo`.`aeroportoarrivo` = `aa`.`codaeroporto`));
 
--- Dump della struttura di vista aeroporti.volo_con_info
+-- Dump della struttura di vista aeroporti-ibrido.volo_con_info
 -- Rimozione temporanea di tabella e creazione della struttura finale della vista
 DROP TABLE IF EXISTS `volo_con_info`;
-CREATE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `volo_con_info` AS SELECT AP.localita AS partenza, datapartenza, orapartenza, AA.localita AS arrivo,dataarrivo, oraarrivo 
-FROM volo JOIN aeroporto AS AP ON volo.aeroportopartenza = AP.codaeroporto
-	JOIN aeroporto AS AA ON volo.aeroportoarrivo = AA.codaeroporto ;
+CREATE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `volo_con_info` AS select `ap`.`localita` AS `partenza`,`volo`.`datapartenza` AS `datapartenza`,`volo`.`orapartenza` AS `orapartenza`,`aa`.`localita` AS `arrivo`,`volo`.`dataarrivo` AS `dataarrivo`,`volo`.`oraarrivo` AS `oraarrivo` from ((`volo` join `aeroporto` `ap` on(`volo`.`aeroportopartenza` = `ap`.`codaeroporto`)) join `aeroporto` `aa` on(`volo`.`aeroportoarrivo` = `aa`.`codaeroporto`));
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
