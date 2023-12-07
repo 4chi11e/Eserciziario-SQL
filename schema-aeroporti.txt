@@ -1,0 +1,12 @@
+AEROPORTO (codaeroporto, localita, nome_commerciale, codcitta*)
+CITTA (codcitta, nome, nazione, abitanti, abitanti_agglomerato)
+VOLO (codvolo, aeroportopartenza*, datapartenza, orapartenza, aeroportoarrivo*, dataarrivo, oraarrivo, aereo*, comandante*)
+CLIENTE (codcliente, cognome, nome, data_nascita)
+ACCOMPAGNA(accompagnato*, accompagnatore*, volo*)
+VOLA (codcliente*, codvolo*)
+AEREO (codaereo, codmodello*, codcompagnia*, anno_costruzione, anno_acquisto)
+COMPAGNIA (codcompagnia, nome, nazione)
+PILOTA (codpilota, cognome, nome, nazionalita, stipendio)
+COPILOTA(codvolo*, codpilota*)
+MODELLO(codmodello, marca, nome, nposti, lunghezza, apertura_alare, peso_vuoto, peso_massimo)
+

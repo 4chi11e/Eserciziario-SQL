@@ -1,0 +1,5 @@
+ATTORE (CodAttore, Nome, AnnoNascita, Nazionalità);
+RECITA (CodAttore*, CodFilm*)
+FILM (CodFilm, Titolo, annoproduzione, Nazionalità, Regista, Genere, Durata)
+PROIEZIONE (CodProiezione, CodFilm*, CodSala*, Incasso, DataProiezione)
+SALA (CodSala, Posti, Nome, Città)
